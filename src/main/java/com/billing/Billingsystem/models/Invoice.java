@@ -1,0 +1,21 @@
+package com.billing.Billingsystem.models;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
+@Document(collection = "invoices")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class Invoice {
+  @Id
+  private String id;
+  private String customerName;
+  private List<Items> itemLists;
+  private double finalPrice;
+}
