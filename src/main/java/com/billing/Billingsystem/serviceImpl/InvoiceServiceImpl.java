@@ -6,6 +6,7 @@ import com.billing.Billingsystem.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,5 +23,10 @@ public class InvoiceServiceImpl implements InvoiceService {
   @Override
   public Invoice createInvoice(Invoice invoice) {
     return invoiceRepository.save(invoice);
+  }
+
+  @Override
+  public List<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
+    return invoiceRepository.findByDateBetween(startDate, endDate);
   }
 }

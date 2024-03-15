@@ -1,5 +1,6 @@
 package com.billing.Billingsystem.controller;
 
+import com.billing.Billingsystem.dto.DateRange;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.repository.InvoiceRepository;
 import com.billing.Billingsystem.service.InvoiceService;
@@ -22,9 +23,16 @@ public class InvoiceController {
     return invoiceService.getAllInvoices();
   }
 
-  @PostMapping
+  @PostMapping("/saveInvoice")
   public Invoice createInvoice(@RequestBody Invoice invoice){
+    System.out.print(invoice);
     return invoiceService.createInvoice(invoice);
   }
+
+  @PostMapping("getBetweenDates")
+  public List<Invoice> getInvoicesBetweenStartDateAndEndDate(@RequestBody DateRange dateRange){
+    return invoiceService.getInvoicesByDateRange(dateRange.getStartDate(),dateRange.getEndDate());
+  }
+
 
 }

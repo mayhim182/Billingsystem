@@ -11,4 +11,6 @@ import lombok.*;
 public class Items {
   private String itemName;
   private double itemPrice;
+  private int totalQty;
+  private double totalPrice;
 }
