@@ -29,7 +29,7 @@ public class InvoiceController {
     return invoiceService.createInvoice(invoice);
   }
 
-  @PostMapping("getBetweenDates")
+  @PostMapping("/getBetweenDates")
   public List<Invoice> getInvoicesBetweenStartDateAndEndDate(@RequestBody DateRange dateRange){
     return invoiceService.getInvoicesByDateRange(dateRange.getStartDate(),dateRange.getEndDate());
   }
