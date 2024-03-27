@@ -1,6 +1,7 @@
 package com.billing.Billingsystem.controller;
 
 import com.billing.Billingsystem.dto.DateRange;
+import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.repository.InvoiceRepository;
 import com.billing.Billingsystem.service.InvoiceService;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/invoices")
+@CrossOrigin(origins = "http://localhost:4200")
 public class InvoiceController {
   @Autowired
   private InvoiceRepository invoiceRepository;
@@ -25,8 +27,12 @@ public class InvoiceController {
 
   @PostMapping("/saveInvoice")
   public Invoice createInvoice(@RequestBody Invoice invoice){
-    System.out.print(invoice);
     return invoiceService.createInvoice(invoice);
+  }
+
+  @PostMapping("/saveAllInvoices")
+  public List<Invoice> saveAllInvoices(@RequestBody List<InvoiceDto> invoiceList){
+    return invoiceService.saveAllInvoices(invoiceList);
   }
 
   @PostMapping("/getBetweenDates")

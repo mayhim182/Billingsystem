@@ -1,5 +1,6 @@
 package com.billing.Billingsystem.serviceImpl;
 
+import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.repository.InvoiceRepository;
 import com.billing.Billingsystem.service.InvoiceService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -23,6 +25,12 @@ public class InvoiceServiceImpl implements InvoiceService {
   @Override
   public Invoice createInvoice(Invoice invoice) {
     return invoiceRepository.save(invoice);
+  }
+
+  @Override
+  public List<Invoice> saveAllInvoices(List<InvoiceDto> invoiceList) {
+    List<Invoice> invoices = new LinkedList<>();
+    return invoiceRepository.saveAll(invoices);
   }
 
   @Override
