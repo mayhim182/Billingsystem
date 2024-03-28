@@ -26,7 +26,7 @@ public class InvoiceController {
   }
 
   @PostMapping("/saveInvoice")
-  public Invoice createInvoice(@RequestBody Invoice invoice){
+  public Invoice createInvoice(@RequestBody InvoiceDto invoice) throws Exception {
     return invoiceService.createInvoice(invoice);
   }
 

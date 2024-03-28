@@ -4,6 +4,7 @@ package com.billing.Billingsystem.models;
 import lombok.*;
 
 @Getter
+@Builder
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor

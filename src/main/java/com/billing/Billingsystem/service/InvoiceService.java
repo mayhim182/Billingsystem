@@ -9,7 +9,7 @@ import java.util.List;
 public interface InvoiceService {
   List<Invoice> getAllInvoices();
 
-  Invoice createInvoice(Invoice invoice);
+  Invoice createInvoice(InvoiceDto invoice) throws Exception;
 
   List<Invoice> saveAllInvoices(List<InvoiceDto> invoiceList);
 

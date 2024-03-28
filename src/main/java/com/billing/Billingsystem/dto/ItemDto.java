@@ -9,7 +9,7 @@ import lombok.*;
 @Data
 public class ItemDto {
   private String name;
-  private double itemPrice;
+  private double price;
   private int quantity;
   private double rowTotal;
 }
