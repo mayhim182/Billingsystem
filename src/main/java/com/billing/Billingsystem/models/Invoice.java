@@ -17,6 +17,7 @@ import java.util.List;
 public class Invoice {
   @Id
   private String id;
+  private String businessName;
   private String customerName;
   private List<Items> itemLists;
   private double finalPrice;

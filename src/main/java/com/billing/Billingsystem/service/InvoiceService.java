@@ -1,5 +1,6 @@
 package com.billing.Billingsystem.service;
 
+import com.billing.Billingsystem.dto.BillFetchDto;
 import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
 
@@ -14,4 +15,6 @@ public interface InvoiceService {
   List<Invoice> saveAllInvoices(List<InvoiceDto> invoiceList);
 
   List<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate);
+
+  List<Invoice> getAllBillsByBusinessName(BillFetchDto billFetchDto);
 }

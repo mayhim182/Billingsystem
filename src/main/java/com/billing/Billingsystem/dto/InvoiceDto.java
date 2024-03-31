@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class InvoiceDto {
   private String id;
+  private String businessName;
   private String customerName;
   private List<ItemDto> itemLists;
   private double finalPrice;

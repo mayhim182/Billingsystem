@@ -1,5 +1,6 @@
 package com.billing.Billingsystem.serviceImpl;
 
+import com.billing.Billingsystem.dto.BillFetchDto;
 import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.models.Items;
@@ -7,10 +8,12 @@ import com.billing.Billingsystem.repository.InvoiceRepository;
 import com.billing.Billingsystem.service.InvoiceService;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     });
 
     invoice1.setCustomerName(invoice.getCustomerName());
+    invoice1.setBusinessName(invoice.getBusinessName());
     invoice1.setFinalPrice(invoice.getFinalPrice());
     invoice1.setDate(invoice.getDate());
     invoice1.setItemLists(itemsList);
@@ -64,4 +68,16 @@ public class InvoiceServiceImpl implements InvoiceService {
   public List<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate) {
     return invoiceRepository.findByDateBetween(startDate, endDate);
   }
+
+  @Cacheable(value = "getAllBillsByBusinessName", key = "#billFetchDto")
+  @Override
+  public List<Invoice> getAllBillsByBusinessName(BillFetchDto billFetchDto) {
+    if (billFetchDto == null) {
+      // Handle null parameter
+      return Collections.emptyList(); // or throw an exception
+    }
+    return invoiceRepository.findByBusinessName(billFetchDto.getBusinessName());
+  }
+
+
 }

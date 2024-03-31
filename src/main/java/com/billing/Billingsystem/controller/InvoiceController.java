@@ -1,5 +1,6 @@
 package com.billing.Billingsystem.controller;
 
+import com.billing.Billingsystem.dto.BillFetchDto;
 import com.billing.Billingsystem.dto.DateRange;
 import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
@@ -38,6 +39,11 @@ public class InvoiceController {
   @PostMapping("/getBetweenDates")
   public List<Invoice> getInvoicesBetweenStartDateAndEndDate(@RequestBody DateRange dateRange){
     return invoiceService.getInvoicesByDateRange(dateRange.getStartDate(),dateRange.getEndDate());
+  }
+
+  @PostMapping("/getByBusiness")
+  public List<Invoice> getInvoicesByBusiness(@RequestBody BillFetchDto billFetchDto){
+    return invoiceService.getAllBillsByBusinessName(billFetchDto);
   }
 
 
