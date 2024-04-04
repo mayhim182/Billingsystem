@@ -69,14 +69,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     return invoiceRepository.findByDateBetween(startDate, endDate);
   }
 
-  @Cacheable(value = "getAllBillsByBusinessName", key = "#billFetchDto")
+  @Cacheable(value = "getAllBillsByBusinessName", key = "#key")
   @Override
   public List<Invoice> getAllBillsByBusinessName(BillFetchDto billFetchDto) {
     if (billFetchDto == null) {
       // Handle null parameter
       return Collections.emptyList(); // or throw an exception
     }
-    return invoiceRepository.findByBusinessName(billFetchDto.getBusinessName());
+
+    List<Invoice> invoice = invoiceRepository.findByBusinessName(billFetchDto.getBusinessName());
+    return invoice;
   }
 
 

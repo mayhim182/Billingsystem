@@ -4,7 +4,6 @@ import com.billing.Billingsystem.dto.BillFetchDto;
 import com.billing.Billingsystem.dto.DateRange;
 import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
-import com.billing.Billingsystem.repository.InvoiceRepository;
 import com.billing.Billingsystem.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +14,6 @@ import java.util.List;
 @RequestMapping("/invoices")
 @CrossOrigin(origins = "http://localhost:4200")
 public class InvoiceController {
-  @Autowired
-  private InvoiceRepository invoiceRepository;
-
   @Autowired
   private InvoiceService invoiceService;
 
