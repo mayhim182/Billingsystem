@@ -9,24 +9,14 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 import java.time.Duration;
 
 @Configuration
 @EnableCaching
+@EnableRedisRepositories
 public class CacheConfig {
-
-  @Bean
-  public RedisCacheManager invoiceCacheManager(RedisConnectionFactory connectionFactory) {
-    RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
-      .entryTtl(Duration.ofMinutes(10))
-      .disableCachingNullValues();
-
-    return RedisCacheManager.builder(connectionFactory)
-      .cacheDefaults(config)
-      .build();
-  }
-
   @Bean
   JedisConnectionFactory jedisConnectionFactory() {
     JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
@@ -41,6 +31,5 @@ public class CacheConfig {
     template.setConnectionFactory(jedisConnectionFactory());
     return template;
   }
-
 
 }

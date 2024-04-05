@@ -6,6 +6,7 @@ import com.billing.Billingsystem.dto.InvoiceDto;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class InvoiceController {
   }
 
   @PostMapping("/getByBusiness")
+  @Cacheable(value = "getAllBillsByBusinessName", key = "#a0")
   public List<Invoice> getInvoicesByBusiness(@RequestBody BillFetchDto billFetchDto){
     return invoiceService.getAllBillsByBusinessName(billFetchDto);
   }
