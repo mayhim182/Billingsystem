@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,7 +18,9 @@ import java.util.List;
 public class Invoice {
   @Id
   private String id;
+  @NotBlank
   private String businessName;
+  @NotBlank
   private String customerName;
   private List<Items> itemLists;
   private double finalPrice;
