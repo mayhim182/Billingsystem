@@ -25,4 +25,5 @@ public class Invoice {
   private List<Items> itemLists;
   private double finalPrice;
   private LocalDate date;
+  private String username;
 }

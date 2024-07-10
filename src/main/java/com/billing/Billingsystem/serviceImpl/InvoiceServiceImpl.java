@@ -9,6 +9,8 @@ import com.billing.Billingsystem.service.InvoiceService;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -31,6 +33,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
   @Override
   public Invoice createInvoice(InvoiceDto invoice) throws Exception {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
     Invoice invoice1 = new Invoice();
     if(invoice == null){
        throw new Exception("Incorrect Data");
@@ -54,6 +58,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     invoice1.setFinalPrice(invoice.getFinalPrice());
     invoice1.setDate(invoice.getDate());
     invoice1.setItemLists(itemsList);
+    invoice1.setUsername(username);
 
     return invoiceRepository.save(invoice1);
   }
@@ -78,6 +83,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     List<Invoice> invoice = invoiceRepository.findByBusinessName(billFetchDto.getBusinessName());
     return invoice;
+  }
+
+  @Override
+  public List<Invoice> getInvoicesByUsername(String username) {
+    return invoiceRepository.findByUsername(username);
   }
 
 

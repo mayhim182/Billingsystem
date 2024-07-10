@@ -3,10 +3,15 @@ package com.billing.Billingsystem.controller;
 import com.billing.Billingsystem.dto.BillFetchDto;
 import com.billing.Billingsystem.dto.DateRange;
 import com.billing.Billingsystem.dto.InvoiceDto;
+import com.billing.Billingsystem.dto.ResponseObject;
 import com.billing.Billingsystem.models.Invoice;
 import com.billing.Billingsystem.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +26,24 @@ public class InvoiceController {
   @GetMapping
   public List<Invoice> getAllInvoices(){
     return invoiceService.getAllInvoices();
+  }
+
+
+  @PostMapping("/getInvoicesForusername")
+  public ResponseEntity<ResponseObject<List<Invoice>>>  invoicesForUserName() throws Exception{
+    List<Invoice> invoiceList = null;
+    ResponseObject<List<Invoice>> responseObject = new ResponseObject<>();
+    try{
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      String userName = authentication.getName();
+      invoiceList = invoiceService.getInvoicesByUsername(userName);
+      responseObject.setData(invoiceList);
+      responseObject.setResponseCode(200);
+      responseObject.setResponseStatus("OK");
+    } catch (Exception e) {
+      //Handle Exception here
+    }
+    return ResponseEntity.ok(responseObject);
   }
 
   @PostMapping("/saveInvoice")

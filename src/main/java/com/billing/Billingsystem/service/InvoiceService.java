@@ -17,4 +17,6 @@ public interface InvoiceService {
   List<Invoice> getInvoicesByDateRange(LocalDate startDate, LocalDate endDate);
 
   List<Invoice> getAllBillsByBusinessName(BillFetchDto billFetchDto);
+
+  List<Invoice> getInvoicesByUsername(String username);
 }

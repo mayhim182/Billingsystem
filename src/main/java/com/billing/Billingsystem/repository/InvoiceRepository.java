@@ -12,4 +12,6 @@ public interface InvoiceRepository extends MongoRepository<Invoice,String> {
   public List<Invoice> findByDateBetween(LocalDate startDate, LocalDate endDate);
 
   public List<Invoice> findByBusinessName(String businessName);
+
+  List<Invoice> findByUsername(String username);
 }
