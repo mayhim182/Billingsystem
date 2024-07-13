@@ -13,4 +13,6 @@ public interface UserService {
 
   void deleteByUserName(String userName);
 
+  void saveAdmin(User user);
+
 }

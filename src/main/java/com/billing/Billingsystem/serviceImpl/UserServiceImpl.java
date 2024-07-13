@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -40,5 +41,12 @@ public class UserServiceImpl implements UserService{
   @Override
   public void deleteByUserName(String userName) {
     userRepository.deleteByUsername(userName);
+  }
+
+  @Override
+  public void saveAdmin(User user) {
+    user.setPassword(passEncoder.encode(user.getPassword()));
+    user.setRoles(Arrays.asList(new String[]{"USER", "Admin"}));
+    userRepository.save(user);
   }
 }
