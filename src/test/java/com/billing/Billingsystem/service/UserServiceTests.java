@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
+//Helps in creating and generating dependencies
 public class UserServiceTests {
 
   @Autowired
